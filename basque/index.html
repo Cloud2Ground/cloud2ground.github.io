@@ -24,7 +24,7 @@
                     return res.json();
                 })
                 .then((json) => {
-                    let download_urls = {};
+                    window.download_urls = {};
                     json.artifacts.some((artifact) => {
                         switch (artifact.name) {
                             case 'basque.linux.zip':
