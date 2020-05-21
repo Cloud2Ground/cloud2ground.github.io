@@ -19,7 +19,11 @@
                     'Authorization': 'token 62794b3472d5f0749c774b8b671de292193e4268'
                 }
             });
-            fetch('https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts', headers)
+            fetch(
+                'https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts',
+                {
+                    headers: headers
+                })
                 .then((res) => {
                     return res.json();
                 })
@@ -52,7 +56,12 @@
                         document
                             .querySelector(`[data-platform="${platform}"]`)
                             .addEventListener('click', () => {
-                                fetch(download_urls[platform], headers);
+                                fetch(
+                                    download_urls[platform],
+                                    {
+                                        headers: headers
+                                    }
+                                );
                             });
                     });
                 });
