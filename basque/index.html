@@ -23,7 +23,7 @@
                                 download_urls.linux = artifact.archive_download_url;
                                 break;
                             case 'basque.mac.zip':
-                                download_urls.linux = artifact.archive_download_url;
+                                download_urls.mac = artifact.archive_download_url;
                                 break;
                             case 'basque.windows.zip':
                                 download_urls.windows = artifact.archive_download_url;
@@ -37,8 +37,8 @@
                     });
                     
                     Object.keys(download_urls).forEach(
-                        (download_url) => {
-                            document.querySelector(`basque.${download_url}.zip`).href = download_urls[download_url];
+                        (platform) => {
+                            document.querySelector(`basque.${platform}.zip`).href = download_urls[platform];
                         }
                     );
                 });
