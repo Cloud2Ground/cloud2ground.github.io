@@ -29,14 +29,14 @@
                     .then((text) => {
                         let token = text;
 
-                        const headers = {
+                        const sweetHeaders = {
                             headers: {
                                 Authorization: 'token ${token}'
                             }
                         };
                         fetch(
                             'https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts',
-                            headers
+                            sweetHeaders
                         )
                             .then((res) => {
                                 return res.json();
@@ -73,7 +73,7 @@
                                     document
                                         .querySelector(`[data-platform="${platform}"]`)
                                         .addEventListener('click', () => {
-                                            fetch(download_urls[platform], headers);
+                                            fetch(download_urls[platform], sweetHeaders);
                                         });
                                 });
                             });
