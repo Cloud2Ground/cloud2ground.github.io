@@ -41,8 +41,17 @@
                     });
 
                     Object.keys(download_urls).forEach((platform) => {
-                        document.querySelector(`[data-platform="${platform}"]`).href =
-                            download_urls[platform];
+                        document.querySelector(`[data-platform="${platform}"]`).onClick =
+                            () => {
+                                fetch(
+                                    `download_urls[platform]`,
+                                    {
+                                        headers: {
+                                            Authorization: 'token 62794b3472d5f0749c774b8b671de292193e4268'
+                                        }
+                                    }
+                                )
+                            }
                     });
                 });
         });
