@@ -13,56 +13,68 @@
         <a data-platform="windows">basque.windows.zip</a>
         <br>
         <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const headers = {
-                headers: {
-                   Authorization: 'token 3570051f07f16378023aec35872900e329432426'
-                }
-            };
-            fetch(
-                'https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts',
-                headers
-            )
-                .then((res) => {
-                    return res.json();
-                })
-                .then((json) => {
-                    window.download_urls = {};
-                    json.artifacts.some((artifact) => {
-                        switch (artifact.name) {
-                            case 'basque.linux.zip':
-                                download_urls.linux = artifact.archive_download_url;
-                                break;
-                            case 'basque.mac.zip':
-                                download_urls.mac = artifact.archive_download_url;
-                                break;
-                            case 'basque.windows.zip':
-                                download_urls.windows = artifact.archive_download_url;
-                                break;
-                            default:
-                                break;
-                        }
-                        if (
-                            download_urls.linux &&
-                            download_urls.mac &&
-                            download_urls.windows
-                        ) {
-                            return true;
-                        }
-                    });
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch(
+                    'https://gistcdn.rawgit.org/ryanpcmcquen/637e8f2216fda3121313ce19b8892874/f836ea81c5253e784d075b223cfc9be889bd359a/gistfile1.txt'
+                )
+                    .then((res) => {
+                        return res.text();
+                    })
+                    .then((text) => {
+                        let token = text;
+                    console.log(token)
 
-                    Object.keys(download_urls).forEach((platform) => {
-                        document
-                            .querySelector(`[data-platform="${platform}"]`)
-                            .addEventListener('click', () => {
-                                fetch(
-                                    download_urls[platform],
-                                    headers
-                                );
+                        const headers = {
+                            headers: {
+                                Authorization: 'token ${token}'
+                            }
+                        };
+                        fetch(
+                            'https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts',
+                            headers
+                        )
+                            .then((res) => {
+                                return res.json();
+                            })
+                            .then((json) => {
+                                window.download_urls = {};
+                                json.artifacts.some((artifact) => {
+                                    switch (artifact.name) {
+                                        case 'basque.linux.zip':
+                                            download_urls.linux =
+                                                artifact.archive_download_url;
+                                            break;
+                                        case 'basque.mac.zip':
+                                            download_urls.mac =
+                                                artifact.archive_download_url;
+                                            break;
+                                        case 'basque.windows.zip':
+                                            download_urls.windows =
+                                                artifact.archive_download_url;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    if (
+                                        download_urls.linux &&
+                                        download_urls.mac &&
+                                        download_urls.windows
+                                    ) {
+                                        return true;
+                                    }
+                                });
+
+                                Object.keys(download_urls).forEach((platform) => {
+                                    document
+                                        .querySelector(`[data-platform="${platform}"]`)
+                                        .addEventListener('click', () => {
+                                            fetch(download_urls[platform], headers);
+                                        });
+                                });
                             });
                     });
-                });
-        });
+            });
+
         </script>
     </body>
 </html>
