@@ -52,7 +52,7 @@
                         document
                             .querySelector(`[data-platform="${platform}"]`)
                             .addEventListener('click', () => {
-                                fetch(`download_urls[platform]`, headers);
+                                fetch(download_urls[platform], headers);
                             });
                     });
                 });
