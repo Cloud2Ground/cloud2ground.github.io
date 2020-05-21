@@ -16,7 +16,7 @@
                     return res.json();
                 })
                 .then((json) => {
-                    let download_urls = {}
+                    let download_urls = {};
                     json.artifacts.some((artifact) => {
                         switch (artifact.name) {
                             case 'basque.linux.zip':
@@ -31,16 +31,19 @@
                             default:
                                 break;
                         }
-                        if (download_urls.linux && download_urls.mac && download_urls.windows) {
+                        if (
+                            download_urls.linux &&
+                            download_urls.mac &&
+                            download_urls.windows
+                        ) {
                             return true;
                         }
                     });
-                    
-                    Object.keys(download_urls).forEach(
-                        (platform) => {
-                            document.querySelector(`basque.${platform}.zip`).href = download_urls[platform];
-                        }
-                    );
+
+                    Object.keys(download_urls).forEach((platform) => {
+                        document.querySelector(`[data-platform="${platform}"]`).href =
+                            download_urls[platform];
+                    });
                 });
         });
         </script>
