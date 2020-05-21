@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Basque</title>
+
+    </head>
+    <body>
+        <a data-platform="linux" href="" download>basque.linux.zip</a>
+        <a data-platform="mac" href="" download>basque.mac.zip</a>
+        <a data-platform="windows" href="" download>basque.windows.zip</a>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('https://api.github.com/repos/ryanpcmcquen/basque/actions/artifacts')
+                .then((res) => {
+                    return res.json();
+                })
+                .then((json) => {
+                    let download_urls = {}
+                    json.artifacts.some((artifact) => {
+                        switch (artifact.name) {
+                            case 'basque.linux.zip':
+                                download_urls.linux = artifact.archive_download_url;
+                                break;
+                            case 'basque.mac.zip':
+                                download_urls.linux = artifact.archive_download_url;
+                                break;
+                            case 'basque.windows.zip':
+                                download_urls.windows = artifact.archive_download_url;
+                                break;
+                            default:
+                                break;
+                        }
+                        if (download_urls.linux && download_urls.mac && download_urls.windows) {
+                            return true;
+                        }
+                    });
+                    
+                    Object.keys(download_urls).forEach(
+                        (download_url) => {
+                            document.querySelector(`basque.${download_url}.zip`).href = download_urls[download_url];
+                        }
+                    );
+                });
+        });
+        </script>
+    </body>
+</html>
