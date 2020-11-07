@@ -19,6 +19,8 @@
         <br>
         <a data-platform="windows">Windows</a>
         <br>
+        <a data-platform="wasm">Wasm</a>
+        <br>
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch(
@@ -58,13 +60,18 @@
                                         download_urls.windows =
                                             artifact.archive_download_url;
                                         break;
+                                    case 'basque.wasm.zip':
+                                        download_urls.wasm =
+                                            artifact.archive_download_url;
+                                        break;
                                     default:
                                         break;
                                 }
                                 if (
                                     download_urls.linux &&
                                     download_urls.mac &&
-                                    download_urls.windows
+                                    download_urls.windows &&
+                                    download_urls.wasm
                                 ) {
                                     return true;
                                 }
