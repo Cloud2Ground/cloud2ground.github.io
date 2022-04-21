@@ -24,13 +24,13 @@
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch(
-                'https://gistcdn.rawgit.org/ryanpcmcquen/637e8f2216fda3121313ce19b8892874/f836ea81c5253e784d075b223cfc9be889bd359a/gistfile1.txt'
+                'https://api.github.com/gists/637e8f2216fda3121313ce19b8892874'
             )
                 .then((res) => {
-                    return res.text();
+                    return res.json();
                 })
-                .then((text) => {
-                    let token = text;
+                .then((json) => {
+                    let token = json.files['gistfile1.txt'].content;
 
                     const sweetHeaders = {
                         headers: {
